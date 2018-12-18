@@ -41,10 +41,14 @@ class Server:
         self.__writer = writer
         request = None
         while request != 'quit':
-            request = await reader.read(100)
-            if len(request.decode()) > 0:
-                print("Request from", addr, request.decode())
-                request = request.decode()
+            try:
+                request = await reader.read(100)
+                if len(request.decode()) > 0:
+                    print("Request from", addr, request.decode())
+                    request = request.decode()
+            except ConnectionResetError:
+                print("Connection with", addr, "lost")
+                request = 'quit'
         self.__writer = None
         self.writers.remove(writer)
         writer.close()
