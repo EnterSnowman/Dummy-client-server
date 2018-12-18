@@ -43,7 +43,6 @@ class Server:
         print("Received %r from %r" % (message, addr))
 
         self.__writers.append(writer)
-        self.__writer = writer
         request = None
         while request != 'quit':
             try:
