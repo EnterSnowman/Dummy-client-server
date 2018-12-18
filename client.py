@@ -37,7 +37,7 @@ async def tcp_echo_client(loop, msg_count):
 
 # message = 'Sashka, hi'
 loop = asyncio.get_event_loop()
-msg_counts = [300, 500, 700]
+msg_counts = [25 for i in range(1, 11)]
 tasks = [tcp_echo_client(loop, m) for m in msg_counts]
 loop.run_until_complete(asyncio.wait(tasks))
 loop.close()
